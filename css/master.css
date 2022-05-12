@@ -1,0 +1,182 @@
+body {
+
+    margin: 0;
+  
+    padding: 0;
+  
+    background: url(FONDO.jpg) no-repeat center top;
+  
+    background-size: cover;
+  
+    font-family: sans-serif;
+  
+    height: 100vh;
+  
+  }
+  
+  .wrap{
+    padding: 25px;
+    margin: 0 auto;
+    width: 385px;
+    background: #F3F3F3;
+    border-radius: 4px;
+    margin-top: 70px;
+    border: 1px solid #E0E0E0;
+}
+  
+  .Login {
+  
+    width: 320px;
+  
+    height: 420px;
+  
+    background: cadetblue;
+  
+    color: #fff;
+  
+    top: 50%;
+  
+    left: 50%;
+  
+    position: absolute;
+  
+    transform: translate(-50%, -50%);
+  
+    box-sizing: border-box;
+  
+    padding: 70px 30px;
+  
+  }
+  
+  
+  
+  .Login .avatar {
+  
+    width: 100px;
+  
+    height: 100px;
+  
+    border-radius: 50%;
+  
+    position: absolute;
+  
+    top: -50px;
+  
+    left: calc(50% - 50px);
+  
+  }
+  
+  
+  
+  .Login h1 {
+  
+    margin: 0;
+  
+    padding: 0 0 20px;
+  
+    text-align: center;
+  
+    font-size: 22px;
+  
+  }
+  
+  
+  
+  .Login label {
+  
+    margin: 0;
+  
+    padding: 0;
+  
+    font-weight: bold;
+  
+    display: block;
+  
+  }
+  
+  
+  
+  .Login input {
+  
+    width: 100%;
+  
+    margin-bottom: 20px;
+  
+  }
+  
+  
+  
+  .Login input[type="text"], .Login input[type="password"] {
+  
+    border: none;
+  
+    border-bottom: 1px solid black;
+  
+    background: transparent;
+  
+    outline: none;
+  
+    height: 40px;
+  
+    color: #fff;
+  
+    font-size: 16px;
+  
+  }
+  
+  
+  
+  .Login input[type="submit"] {
+  
+    border: none;
+  
+    outline: none;
+  
+    height: 40px;
+  
+    background: darkblue;
+  
+    color: #fff;
+  
+    font-size: 18px;
+  
+    border-radius: 20px;
+  
+  }
+
+  .login-box input[type="submit"]:hover {
+
+    cursor: pointer;
+  
+    background: #ffc107;
+  
+    color: #000;
+  
+  }
+  
+  
+  
+  .Login a {
+  
+    text-decoration: none;
+  
+    font-size: 12px;
+  
+    line-height: 20px;
+  
+    color: darkgrey;
+  
+  }
+  
+  
+  
+  .Login a:hover {
+  
+    color: #fff;
+  
+  }
+  
+  .micl{
+    color: green;
+  }
+
