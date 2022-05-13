@@ -15,7 +15,37 @@
     </script>
     <!-- FONTS FANTA-->
     <script src="https://kit.fontawesome.com/1a4a93a8d2.js" crossorigin="anonymous"></script>
+    <style>
+        .hojapdf{
+            border: #000 5px;
+            max-width: 2480px;
+            height: auto;
+            color: #000;
+        }
 
+        .hojapdf h1,h2,h3,h4,p{
+            color: #000;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .hojapdf h1{
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .hojapdf h2{
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .hojapdf h3{
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 
 <body>

@@ -4,7 +4,7 @@ $idUsuario = $_SESSION['id'];
 if (isset($_SESSION['id'])) {
   $sql = mysqli_query($conexion, 'SELECT * FROM `alumno` where id= "' . $idUsuario . '" ');
   $filas = mysqli_fetch_assoc($sql);
-  include("../includes/headeralum.php");
+  include("../includes/header.php");
 ?>
 
 <body class="text-center">
