@@ -1,6 +1,6 @@
 <?php include "conexion.php";
 session_start();
-if (isset($_SESSION['matricula'])) {
+if (isset($_SESSION['Id_admin'])) {
   include("header.php");
   $sqlEncuestas = "SELECT * FROM encuesta INNER join materias on encuesta.Materia= materias.ID";
   $res = mysqli_query($conexion, $sqlEncuestas);
@@ -123,7 +123,7 @@ if (isset($_SESSION['matricula'])) {
                                 <i class="fas fa-edit"></i>
                         </td>
                         <td>
-                            <a href="../fpdf/reporte2.php"
+                            <a href="../fpdf/reporte2.php?Id_encuesta= <?php echo $mostrar["Id_encuesta"]; ?>"
                                 class="btn btn-info ">
                                 <i class="fas fa-file-signature"></i>
                         </td>

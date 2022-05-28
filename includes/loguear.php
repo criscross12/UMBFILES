@@ -35,7 +35,7 @@ if($array['contar']>0 ){
     $consultid = mysqli_query($conexion,$sqlid);
     $idusuario = mysqli_fetch_row($consultid)[0];
     $_SESSION['Id_admin'] = $idusuario;   
-    header("location: indexCC.php");
+    header("location: index.php");
 }else{
     echo "<script>
     alert('!!ERROR!!');

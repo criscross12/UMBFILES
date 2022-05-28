@@ -1,8 +1,8 @@
 <?php include "conexion.php";
 session_start();
-if (isset($_SESSION['matricula'])) {
-  $id = $_SESSION['matricula'];
-  $sql = mysqli_query($conexion, "SELECT * FROM `ce`");
+if (isset($_SESSION['Id_admin'])) {
+  $Id_admin = $_SESSION['Id_admin'];
+  $sql = mysqli_query($conexion, "SELECT * FROM `administradores` where Id_admin = '$Id_admin'");
   $filas = mysqli_fetch_assoc($sql);
   include("header.php");
 ?>

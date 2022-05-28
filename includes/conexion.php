@@ -1,7 +1,7 @@
 <?php
-$host = "172.16.11.82";
-$user = "remoto";
-$pass =  "dbx2022@";
-$bd = "umb";
+$host = "localhost";
+$user = "root";
+$pass =  "";
+$bd = "proyecto";
     $conexion = mysqli_connect($host,$user,$pass,$bd);
 ?>
