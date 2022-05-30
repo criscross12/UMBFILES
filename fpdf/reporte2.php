@@ -6,14 +6,19 @@ if (isset($_SESSION['Id_admin'])) {
   $filas = mysqli_fetch_assoc($sql);
   if (isset($_GET['Id_encuesta'])) {
     $id = $_GET['Id_encuesta'];
-    $query = "SELECT * FROM `encuesta` INNER join materias on encuesta.Materia= materias.ID INNER JOIN maestros on encuesta.Docente= maestros.ID WHERE Id_encuesta = $id";
+    $query = "SELECT * FROM `encuesta` INNER join materias on encuesta.Materia= materias.ID INNER JOIN maestros on encuesta.Docente= maestros.ID INNER join semestre on materias.Semestre = semestre.id INNER JOIN carrera on materias.Carrera=carrera.id WHERE Id_encuesta = $id";
     $result = mysqli_query($conexion, $query);
     if (mysqli_num_rows($result) == 1) {
       $row = mysqli_fetch_array($result);
       $nombre_docente = $row['Nombre_Docente'];
-      $matricula = $row['Nombre'];
-      // $contrasena = $row['Contrasena'];
-      $status = $row[4];      
+      $nombre_materia = $row['Nombre'];
+      $nombre_semestre = $row['nombre_semestre'];
+      $nombre_carrera = $row['Nombre_Carrera'];
+      $clave_docente = $row['Matricula'];
+      $fecha_inicio = $row['Fecha'];
+      $fecha_fin = $row['FechaFin'];
+      $hora = new DateTime("now",new DateTimeZone('America/Mexico_City'));    
+      $time = $hora->format("d-m-Y");
     }
 }else{
   echo "bad";
@@ -29,7 +34,6 @@ if (isset($_SESSION['Id_admin'])) {
                     <td width="20%" align="center" valign="middle"><img src="../includes/logo-edomex.png"
                             alt="Estado de México" width="90%"></td>
                     <td width="60%" align="center" valign="middle">
-                        <p><?php echo $nombre_docente;?></p>
                         <h1>Universidad Mexiquense del Bicentenario</h1>
                         <h2>Unidad de Estudios Superiores Xalatlaco</h2>
                         <h3>Coordinación de carrera</h3>
@@ -44,8 +48,8 @@ if (isset($_SESSION['Id_admin'])) {
                 </tr>
                 <tr>
                     <td colspan="3" align="center" valign="middle">
-                        <p class="text-justify">A continuación, se presentan la información recopilada en el periodo de
-                            2021-11-11 al 0000-00-00 del desempeño laboral realizado al docente Eduardo Legarreta Montes
+                        <p class="text-justify">A continuación, se presentan la información recopilada en el periodo de <?php echo $fecha_inicio?> al 0000-00-00 del desempeño laboral realizado al
+                            docente Eduardo Legarreta Montes
                             por parte de los alumnos al cual imparte la asignatura ProgramaciÃƒÂ³n orientada a objetos.
                         </p>
                     </td>
@@ -56,27 +60,27 @@ if (isset($_SESSION['Id_admin'])) {
                         <table width="100%" border="1">
                             <tr>
                                 <td width="22%">Carrera:</td>
-                                <td width="27%"><?php echo "jijija"?></td>
+                                <td width="27%"><?php echo $nombre_carrera?></td>
                                 <td width="29%">Semestre:</td>
-                                <td width="22%">&nbsp;</td>
+                                <td width="22%"><?php echo $nombre_semestre?></td>
                             </tr>
                             <tr>
                                 <td>Clave Docente:</td>
-                                <td>&nbsp;</td>
+                                <td><?php echo $clave_docente?></td>
                                 <td>Grupo:</td>
-                                <td>&nbsp;</td>
+                                <td><?php echo $nombre_carrera?></td>
                             </tr>
                             <tr>
                                 <td>Nombre Docente:</td>
-                                <td>&nbsp;</td>
+                                <td><?php echo $nombre_docente?></td>
                                 <td>Fecha Reporte:</td>
-                                <td>&nbsp;</td>
+                                <td><?php echo $time?></td>
                             </tr>
                             <tr>
                                 <td>Periodo:</td>
-                                <td>&nbsp;</td>
+                                <td><?php echo "2021-2022"?></td>
                                 <td>Tamaño Muestra:</td>
-                                <td>&nbsp;</td>
+                                <td><?php echo $nombre_carrera?></td>
                             </tr>
                         </table>
                     </td>
@@ -103,7 +107,7 @@ if (isset($_SESSION['Id_admin'])) {
                                             Coodi </p>
                                     </div>
                                 </td>
-                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2"><?php echo $nombre_carrera?></td>
 
                             </tr>
                         </table>
@@ -136,7 +140,7 @@ if (isset($_SESSION['Id_admin'])) {
   include("../includes/futteralum.php");
   header("location: ../../index.php");
 }
-include("futteralum.php");
+include("../includes/futteralum.php");
 
 
 
