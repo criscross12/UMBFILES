@@ -43,7 +43,7 @@ if (isset($_POST['save'])) {
 
             $consulta = mysqli_query($conexion, $sql);
             if (!$consulta) {
-                die("query fail");
+                die("query fail sistemas");
             } else {
                 echo "<script>
         alert('Registro Exitoso :)');
@@ -82,7 +82,7 @@ if (isset($_POST['save'])) {
             VALUES ( '$nombre', '$AP', '$AM', '$matricula', '$contrasena', '$carrera', '$Semestre')";
             $consulta = mysqli_query($conexion, $sql);
             if (!$consulta) {
-                die("query fail");
+                die("query fail Mecanica");
             } else {
 
                 echo "<script>
@@ -126,7 +126,7 @@ if (isset($_POST['save'])) {
             $consulta = mysqli_query($conexion, $sql);
 
             if (!$consulta) {
-                die("query fail");
+                die("query fail gestion");
             } else {
                 echo "<script>
             alert('Registro Exitoso :)');
