@@ -21,7 +21,7 @@ if (isset($_SESSION['Id_admin'])) {
         </p>
       </main>
     </div>
-    <img src="colibri.jpg" alt="col" style="width: 500px; height: 250px;">
+    <img src="t-1862x1862.jpg" alt="col" style="width: 250px; height: 500;">
   </body>
 <?php
   include("futter.php");
