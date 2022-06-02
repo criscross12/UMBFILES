@@ -1,6 +1,6 @@
 <?php include "conexion.php";
 session_start();
-if (isset($_SESSION['matricula'])) {
+if (isset($_SESSION['Id_admin'])) {
   include("header.php");
 ?>
 

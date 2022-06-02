@@ -1,14 +1,14 @@
 <?php include "conexion.php";
 session_start();
-$idUsuario = $_SESSION['matricula'];
-if (isset($_SESSION['matricula'])) {
-    $sql = mysqli_query($conexion, 'SELECT * FROM `ce` where Matricula= "' . $idUsuario . '" ');
+$idUsuario = $_SESSION['Id_admin'];
+if (isset($_SESSION['Id_admin'])) {
+    $sql = mysqli_query($conexion, 'SELECT * FROM `administradores` where Id_admin= "' . $idUsuario . '" ');
     $filas = mysqli_fetch_assoc($sql); 
-    $id = $filas["id"];
+    $id = $filas["Id_admin"];
     $nombre = $filas["Nombre"];
-    $ap_paterno = $filas["Ap_Paterno"];
-    $ap_materno = $filas["Ap_Materno"];
-    $Contra = $filas["Contrasena"];
+    $ap_paterno = $filas["A_paterno"];
+    $ap_materno = $filas["A_materno"];
+    $Contra = $filas["password"];
     $Matricula = $filas["Matricula"];
   include("header.php");
 ?>
@@ -35,7 +35,7 @@ if (isset($_SESSION['matricula'])) {
                             <div class="col-sm-6">
                                 <p class="font-weight-bold">Nombre:</p>
                                 <h6 class="text-muted">
-                                    <?php echo utf8_encode(strtoupper($nombre)),"  ",utf8_encode( strtoupper($ap_paterno)), "  ",utf8_encode( strtoupper($ap_materno)) ?>
+                                    <?php echo $nombre,"  ",$ap_paterno, "  ",$ap_materno ?>
                                 </h6>
                                 <p class="font-weight-bold">Contraseña:</p>
                                 <h6 class="text-muted"><?php echo $Contra ?></h6>

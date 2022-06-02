@@ -6,6 +6,9 @@ if (isset($_SESSION['Id_admin'])) {
   $filas = mysqli_fetch_assoc($sql);
   if (isset($_GET['Id_encuesta'])) {
     $id = $_GET['Id_encuesta'];
+    $sqlCount = "SELECT COUNT(Id_encuesta) AS total FROM encuesta_respuestas where Id_encuesta = $id";
+    $resultSQL = mysqli_query($conexion, $sqlCount);
+    $data = mysqli_fetch_assoc($resultSQL);    
     $query = "SELECT * FROM `encuesta` INNER join materias on encuesta.Materia= materias.ID INNER JOIN maestros on encuesta.Docente= maestros.ID INNER join semestre on materias.Semestre = semestre.id INNER JOIN carrera on materias.Carrera=carrera.id WHERE Id_encuesta = $id";
     $result = mysqli_query($conexion, $query);
     if (mysqli_num_rows($result) == 1) {
@@ -48,9 +51,9 @@ if (isset($_SESSION['Id_admin'])) {
                 </tr>
                 <tr>
                     <td colspan="3" align="center" valign="middle">
-                        <p class="text-justify">A continuación, se presentan la información recopilada en el periodo de <?php echo $fecha_inicio?> al 0000-00-00 del desempeño laboral realizado al
-                            docente Eduardo Legarreta Montes
-                            por parte de los alumnos al cual imparte la asignatura ProgramaciÃƒÂ³n orientada a objetos.
+                        <p class="text-justify">A continuación, se presentan la información recopilada en el periodo de <?php echo $fecha_inicio?> al <?php echo $fecha_fin?> del desempeño laboral realizado al
+                            docente <?php echo $nombre_docente?>
+                            por parte de los alumnos al cual imparte la asignatura <?php echo $nombre_materia?>.
                         </p>
                     </td>
                 </tr>
@@ -80,7 +83,7 @@ if (isset($_SESSION['Id_admin'])) {
                                 <td>Periodo:</td>
                                 <td><?php echo "2021-2022"?></td>
                                 <td>Tamaño Muestra:</td>
-                                <td><?php echo $nombre_carrera?></td>
+                                <td><?php echo $data['total']?></td>
                             </tr>
                         </table>
                     </td>

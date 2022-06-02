@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['matricula'])) {
+if (isset($_SESSION['Id_admin'])) {
 ?>
 <?php include 'conexion.php';
   if (isset($_GET['Id_encuesta'])) {

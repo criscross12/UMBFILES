@@ -1,15 +1,17 @@
 <?php include "conexion.php";
 session_start();
 if (isset($_SESSION['Id_admin'])) {
+  $Id_admin = $_SESSION['Id_admin'];
+  $sql = mysqli_query($conexion, "SELECT * FROM `administradores` where Id_admin = '$Id_admin'");
+  $filas = mysqli_fetch_assoc($sql);
+  $id_admin_carrera = $filas['Carrera'];
   include("header.php");
-  $sqlEncuestas = "SELECT * FROM encuesta INNER join materias on encuesta.Materia= materias.ID";
+  $sqlEncuestas = "SELECT * FROM encuesta INNER join materias on encuesta.Materia= materias.ID where Carrera = $id_admin_carrera";
   $res = mysqli_query($conexion, $sqlEncuestas);
   $sqlMaestros = "SELECT * FROM maestros";
   $resultMaestros = mysqli_query($conexion, $sqlMaestros);
   $sqlMaterias = "SELECT * FROM materias";
   $resultMaterias = mysqli_query($conexion, $sqlMaterias);
-//   $sql = "SELECT * FROM estatus";
-//   $resultStatus = mysqli_query($conexion, $sql);
 ?>
 <div class="alert alert-success" role="alert">
     <div class="container">
