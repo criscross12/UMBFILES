@@ -30,7 +30,7 @@ $Anio  = $hoy->format("Y");
     $idEncuestaRes = $row['ELMAX']+1;
 
     $inserta = "INSERT INTO encuesta_respuestas(IdEncuestaRes, Id_encuesta, IdUsuario, IdCarrera, IdSemestre, IdDocente, IdAsignatura, FechaEncuesta, Revisado, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, Promedio, Activo, IdEncuestaInterna, Anio) VALUES 
-    ( $idEncuestaRes , $id,$idUsuario,$idCarrera,$IdSemestre,$idDocente,$IdMateria,$today,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,$Anio)";
+    ( $idEncuestaRes , $id,$idUsuario,$idCarrera,$IdSemestre,$idDocente,$IdMateria,'$today',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,$Anio)";
     $conexion->query($inserta)|| die($conexion->error);
     
 ?>
