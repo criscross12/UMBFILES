@@ -125,7 +125,7 @@ if (isset($_SESSION['Id_admin'])) {
                                 <i class="fas fa-edit"></i>
                         </td>
                         <td>
-                            <a href="../fpdf/reporte2.php?Id_encuesta= <?php echo $mostrar["Id_encuesta"]; ?>"
+                            <a href="reporte2.php?Id_encuesta= <?php echo $mostrar["Id_encuesta"]; ?>"
                                 class="btn btn-info ">
                                 <i class="fas fa-file-signature"></i>
                         </td>
