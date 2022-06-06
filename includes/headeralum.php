@@ -62,7 +62,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav mr-auto text-center">
-                <a class="nav-item nav-link" href="AlumArchi.php">Archivos</a>
+                <!-- <a class="nav-item nav-link" href="AlumArchi.php">Archivos</a> -->
                 <a class="nav-item nav-link" href="publicacines.php">Evaluación Docente</a>
                 <a class="nav-item nav-link " href="acerca.php">
                     <i class="fas fa-question"></i>
