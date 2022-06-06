@@ -60,7 +60,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav mr-auto text-center ">
-                <a class="nav-item nav-link" href="modificar.php"><strong>Alumnos</strong></a>
+            <!--<a class="nav-item nav-link" href="modificar.php"><strong>Alumnos</strong></a>-->
                 <a class="nav-item nav-link" href="materias.php"><strong>Materias</strong></a>
                 <a class="nav-item nav-link" href="maestros.php"><strong>Maestros</strong></a>
                 <a class="nav-item nav-link " href="encuestas.php"><strong>Encuestas</strong></a>

@@ -12,9 +12,8 @@ if (isset($_SESSION['Id_admin'])) {
       <main role="main" class="inner cover">
         <br>
         <h1 class="cover-heading">Bienvenido Lic. <?php echo $filas['Nombre'] ?></h1>
-        <p class="lead" style="text-align: justify;">Éste es el sistema gestor de archivos para uso exclusivo de la UESX, debido a la contingencia provocada por el COVID-19 el sistema será
-          auxiliar en la gestión de archivos tanto para el encargado de control escolar como el alumno evitando el contacto social para reducir cualquier posibilidad de contagios.
-          Aqui tendra a la disposición los archivos de los alumnos de recien ingreso para su manipulación dentro del siste SIDIUMB, que puede ingresar en el enlace de abajo.
+        <p class="lead" style="text-align: justify;">Bienvenido a UMBFILES, una app web pensada en el registro y control de la evaluación docente que se lleva a cabo dentro de la UES Xalatlaco.        
+        El propósito de esta evaluación es generar estrategias y medidas de refuerzo relacionadas directamente con las oportunidades de mejora que presenta la práctica docente en nuestra Universidad. Las necesidades de cada docente son diferentes, lo cual requiere de un proceso de inclusión flexible para el alcance de los objetivos del proceso educativo de calidad. Esto permitirá a cada docente adquirir un grado de compromiso consigo mismos, con el proceso educativo y con la institución.
         </p>
         <p class="lead">
           <a href="http://sidiumb.umb.edu.mx:8088/" class="btn btn-lg btn-secondary">SIDIUMB</a>
