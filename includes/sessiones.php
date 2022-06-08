@@ -10,6 +10,7 @@ if (isset($_SESSION['id'])) {
     $a_mat = $filas['A_Materno'];
     $idCarrera = $filas['Carrera'];
     $idSemestre = $filas['semestre'];
+    $grupo = $filas['grupo'];
 }else{
     ?>
 <script>

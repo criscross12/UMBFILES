@@ -1,16 +1,16 @@
 <?php include "conexion.php";
 session_start();
-$idCE = $_SESSION['matricula'];
-if (isset($_SESSION['matricula'])) {
+$idCE = $_SESSION['Id_admin'];
+if (isset($_SESSION['Id_admin'])) {
 ?>
 <?php
-    $sql = mysqli_query($conexion, 'SELECT * FROM `ce` WHERE Matricula = '.$idCE.' ');
+    $sql = mysqli_query($conexion, "SELECT * FROM `administradores` where Id_admin = '$idCE'");
     $filas = mysqli_fetch_assoc($sql);
     $nombre = $filas['Nombre'];
-    $Ap_Paterno = $filas['Ap_Paterno'];
-    $Ap_Materno = $filas['Ap_Materno'];
+    $Ap_Paterno = $filas['A_paterno'];
+    $Ap_Materno = $filas['A_materno'];
     $matricula = $filas['Matricula'];
-    $password = $filas['Contrasena'];
+    $password = $filas['password'];
     ?>
 <?php include 'header.php' ?>
 <div class="container p-4">
@@ -20,17 +20,17 @@ if (isset($_SESSION['matricula'])) {
                 <form action="CE_CRUD/UptadeProfileCe.php" method="POST">
                     <div class="form-group">
                         <label class="font-weight-bold">Nombre</label>
-                        <input name="nombre" type="text" class="form-control" value="<?= utf8_encode($nombre); ?>"
+                        <input name="nombre" type="text" class="form-control" value="<?= $nombre; ?>"
                             placeholder="Update Nombre">
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold">Apellido Paterno</label>
-                        <input name="AP" type="text" class="form-control" value="<?= utf8_encode($Ap_Paterno); ?>"
+                        <input name="AP" type="text" class="form-control" value="<?= $Ap_Paterno; ?>"
                             placeholder="Update Nombre">
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold">Apellido Materno</label>
-                        <input name="AM" type="text" class="form-control" value="<?=utf8_encode($Ap_Materno)  ?>"
+                        <input name="AM" type="text" class="form-control" value="<?=$Ap_Materno?>"
                             placeholder="Update Nombre">
                     </div>
                     <div class="form-group">

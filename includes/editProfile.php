@@ -63,7 +63,7 @@ if (isset($_SESSION['id'])) {
                     <div class="form-group">
                         <label class="font-weight-bold">Matricula</label>
                         <input name="Matricula" type="text" class="form-control"
-                            value="<?php echo $filas['Matricula'] ?>" disabled>
+                            value="<?php echo $idUsuario ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold">Contraseña</label>

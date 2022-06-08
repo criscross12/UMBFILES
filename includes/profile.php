@@ -7,17 +7,15 @@ if (isset($_SESSION['id'])) {
     include("headeralum.php");
 ?>
 <?php
-   $sql = "SELECT alumno.id as id,carrera.Nombre_Carrera as NombreCarrera, alumno.Nombre as NombreAlumno,alumno.A_paterno as AP,semestre.nombre_semestre as semestre, alumno.A_Materno AS AM, alumno.Matricula AS matricula,alumno.Contrasena as contrasena FROM alumno INNER join carrera on alumno.Carrera = carrera.id INNER JOIN semestre on semestre.id = alumno.semestre where alumno.id= $idUsuario";
+   $sql = "SELECT carrera.Nombre_Carrera as NombreCarrera, alumno.Nombre as NombreAlumno,alumno.A_paterno as AP,semestre.nombre_semestre as semestre, alumno.A_Materno AS AM,alumno.Contrasena as contrasena FROM alumno INNER join carrera on alumno.Carrera = carrera.id INNER JOIN semestre on semestre.id = alumno.semestre where alumno.id= $idUsuario";
     if ($conexion->query($sql)->num_rows > 0) {
         foreach ($conexion->query($sql) as $filas) {
             $NombreAlum = $filas["NombreAlumno"];
             $AP = $filas["AP"];
             $AM = $filas["AM"];
-            $Matricula = $filas["matricula"];
             $Contra = $filas["contrasena"];
             $carrera = $filas["NombreCarrera"];
             $semestre = $filas["semestre"];
-            $id = $filas["id"];
         }
     }                
 
@@ -33,7 +31,7 @@ if (isset($_SESSION['id'])) {
                             <i class="fas fa-user-tie fa-7x mt-5"></i>
                             <h2 class="font-weight-bold mt-4">Alumno</h2>
                             <p>Editar información del alumno</p>
-                            <a href="editProfile.php?id=<?php echo $id ?>" class="btn btn-success">
+                            <a href="editProfile.php?id=<?php echo $idUsuario ?>" class="btn btn-success">
                                 <i class="fas fa-edit"></i>
                             </a>
                         </div>
@@ -51,7 +49,7 @@ if (isset($_SESSION['id'])) {
                             </div>
                             <div class="col-sm-6">
                                 <p class="font-weight-bold">Matrícula:</p>
-                                <h6 class="text-muted"><?php echo $Matricula ?></h6>
+                                <h6 class="text-muted"><?php echo $idUsuario ?></h6>
                                 <p class="font-weight-bold">Carrera:</p>
                                 <h6 class="text-muted"><?php echo  $carrera ?></h6>
                             </div>

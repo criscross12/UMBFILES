@@ -8,7 +8,7 @@ if (isset($_SESSION['Id_admin'])) {
     include("header.php");
     $sqlSemestre = "SELECT * FROM semestre";
     $result = mysqli_query($conexion, $sqlSemestre);
-    $sqlCarrera = "SELECT * FROM carrera";
+    $sqlCarrera = "SELECT * FROM carrera WHERE Carrera = '$id_admin_carrera'";
     $resultCarrera = mysqli_query($conexion, $sqlCarrera);
 ?>
 

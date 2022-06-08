@@ -1,11 +1,9 @@
 <?php
  include "conexion.php";
     include "sessiones.php";
-    
-    
     $sqlEncuestas = "SELECT * FROM encuesta WHERE Status= 1";
     $res = mysqli_query($conexion, $sqlEncuestas);
-    $sqlNameM = "SELECT * FROM `encuesta` INNER join materias on encuesta.Materia= materias.ID where Status=1";
+    $sqlNameM = "SELECT * FROM `encuesta` INNER join materias on encuesta.Materia= materias.ID INNER JOIN maestros on encuesta.Docente = maestros.ID where encuesta.Status=1 and materias.grupo='$grupo'";
     $resMa = mysqli_query($conexion, $sqlNameM);
 
     include("headeralum.php");
@@ -25,7 +23,9 @@
                         <thead>
                             <tr>
                                 <th width="13%">Título</th>
+                                <th width="13%">Docente</th>
                                 <th width="13%">Fecha de Publicación</th>
+                                <th width="13%">Fecha Limite</th>
                                 <th width="13%">Contestar</th>
                                 <th width="10%">Status</th>
                             </tr>
@@ -43,7 +43,9 @@
                             <tr>
 
                                 <td><?php echo utf8_encode($mostrar['Nombre']); ?></td>
+                                <td><?php echo $mostrar['Nombre_Docente'] . " " . $mostrar['Ap_Paterno'] . " " . $mostrar['Ap_Materno']; ?></td>
                                 <td><?php echo $fecha;  ?></td>
+                                <td><?php echo $mostrar['FechaFin'];  ?></td>
                                 <td>
                                     <form action="form.php" method="post">
                                         <input type="hidden" name="Id_encuesta" value="<?=$mostrar['Id_encuesta']?>">
