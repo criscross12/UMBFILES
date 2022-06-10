@@ -5,10 +5,11 @@ if (isset($_SESSION['id'])) {
     $sql = mysqli_query($conexion, 'SELECT * FROM `alumno` where id= "' . $idUsuario . '" ');
     $filas = mysqli_fetch_assoc($sql);
     include("headeralum.php");
-    $sql = "SELECT * FROM preguntas WHERE categoria=2";
+    $sql = "SELECT * FROM `preguntas` INNER join Categoria_Pregunta on Categoria_Pregunta.id_cate_pre = preguntas.categoria WHERE preguntas.categoria = 2";
     $pre = mysqli_query($conexion, $sql);
-    $sqlRes = "SELECT * FROM respuestas";
-    $res = mysqli_query($conexion, $sqlRes);
+    $sqlPre = "SELECT * FROM `preguntas` INNER join Categoria_Pregunta on Categoria_Pregunta.id_cate_pre = preguntas.categoria WHERE preguntas.categoria = 2";
+    $cat = mysqli_query($conexion, $sqlPre);
+    $filasCat = mysqli_fetch_assoc($cat);
 ?>
     <?php
     //Datos generales de la encuesta
@@ -43,7 +44,7 @@ if (isset($_SESSION['id'])) {
                         <?= $nombre_docente ?></div>
                     <div class="panel-body">
                         <div class="alert alert-primary" role="alert">
-                            Sobre actitud
+                        <?=$filasCat['Categoria'] ?>
                         </div>
                         <form action="form3.php?Id_encuesta=<?php echo $id ?>" method="POST">
                             <table class="table table-primary  table-striped">
@@ -60,10 +61,10 @@ if (isset($_SESSION['id'])) {
                                 <tbody>
                                     <?php
                                     while ($mostrarP = mysqli_fetch_array($pre)) {
+                                        $preguntaTXT = $mostrarP['Texto'];
                                     ?>
                                         <tr>
-
-                                            <td><?php $mostrarP['Texto'] ?></td>
+                                            <td><?php echo $mostrarP['Id'] . "._"." " . $preguntaTXT ?></td>
                                             <td>
                                                 <input class="form-check-input" type="radio" name="Pregunta<?php echo $mostrarP[0] ?>" id="flexRadioDefault1" value="1" checked>
                                             </td>

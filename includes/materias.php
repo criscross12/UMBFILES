@@ -37,11 +37,11 @@ if (isset($_SESSION['Id_admin'])) {
                         <tr>
                             <td>
                                 <a>
-                                    <?php echo utf8_encode($NombreMateria) ?>
+                                    <?php echo $NombreMateria ?>
                                 </a>
                             </td>
-                            <td> <?php echo utf8_encode($Carrera) ?> </td>
-                            <td> <?php echo utf8_encode($Semestre)  ?> </td>
+                            <td> <?php echo $Carrera ?> </td>
+                            <td> <?php echo $Semestre  ?> </td>
                             <td>
                                 <a href="editMateria.php?id=<?php echo $filas['id']; ?>" class="btn btn-secondary">
                                     <i class="fas fa-edit"></i>

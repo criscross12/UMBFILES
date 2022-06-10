@@ -1,159 +1,155 @@
-<?php include "conexion.php";
-require('../fpdf/includes/jpgraph/src/jpgraph.php');
-require('../fpdf/includes/jpgraph/src/jpgraph_bar.php');
+<?php include 'conexion.php';
+require ('jpgraph/src/jpgraph.php');
+require ('jpgraph/src/jpgraph_bar.php');
 session_start();
+$idUsuario = $_SESSION['Id_admin'];
+//eliminar gráficos anteriores en la carpeta temporal
+$files = glob('img/graficas/*'); //obtenemos todos los nombres de los ficheros
+foreach ($files as $file) {
+    if (is_file($file))
+        unlink($file); //elimino el fichero
+}
+//fin
 if (isset($_SESSION['Id_admin'])) {
-    $Id_admin = $_SESSION['Id_admin'];
-    $sql = mysqli_query($conexion, "SELECT * FROM `administradores` where Id_admin = '$Id_admin'");
+    $sql = mysqli_query($conexion, 'SELECT * FROM `administradores` where Id_admin= "' . $idUsuario . '" ');
     $filas = mysqli_fetch_assoc($sql);
+    if (isset($_GET['Id_encuesta'])) {
+        $id = $_GET['Id_encuesta'];
+        $sqlCount = "SELECT COUNT(Id_encuesta) AS total FROM encuesta_respuestas where Id_encuesta = $id";
+        $resultSQL = mysqli_query($conexion, $sqlCount);
+        $data = mysqli_fetch_assoc($resultSQL);
+        $query = "SELECT * FROM `encuesta` INNER join materias on encuesta.Materia= materias.ID INNER JOIN maestros on encuesta.Docente= maestros.ID INNER join semestre on materias.Semestre = semestre.id INNER JOIN carrera on materias.Carrera=carrera.id WHERE Id_encuesta = $id";
+        $result = mysqli_query($conexion, $query);
+        if (mysqli_num_rows($result) == 1) {
+            $row = mysqli_fetch_array($result);
+            $nombre_docente = $row['Nombre_Docente'];
+            $nombre_materia = $row['Nombre'];
+            $nombre_semestre = $row['nombre_semestre'];
+            $nombre_carrera = $row['Nombre_Carrera'];
+            $clave_docente = $row['ID'];
+            $fecha_inicio = $row['Fecha'];
+            $fecha_fin = $row['FechaFin'];
+            $hora = new DateTime("now", new DateTimeZone('America/Mexico_City'));
+            $time = $hora->format("d-m-Y");
+        }
+    } else {
+        echo "bad";
+    }
     include("header.php");
 ?>
-    <!-- Reporte Start-->
-    <?php
-    $id = $_GET['Id_encuesta'];
-    echo $id;
-    $query5 = "SELECT AVG(P1) as PR1,AVG(P2) as PR2,AVG(P3) as PR3,AVG(P4) as PR4,AVG(P5) as PR5,AVG(P6) as PR6,AVG(P7) as PR7,AVG(P7) as PR8,AVG(P9) as PR9,AVG(P10) as PR10,AVG(P11) as PR11,AVG(P12) as PR12,AVG(P13) as PR13,AVG(P14) as PR14,AVG(P15) as PR15,AVG(P16) as PR16,AVG(P17) as PR17,AVG(P18) as PR18,AVG(P19) as PR19,AVG(P20) as PR20,AVG(P21) as PR21,AVG(P22) as PR22,AVG(P23) as PR23,AVG(P24) as PR24,AVG(Promedio) as Prom FROM encuesta_respuestas where Id_encuesta = '$id'";
-    $res5 = $conexion->query($query5);
-    $row5 = $res5->fetch_assoc();
-
-    //valores para la gráfica
-    $p1 = $row5['PR1'];
-    $p2 = $row5['PR2'];
-    $p3 = $row5['PR3'];
-    $p4 = $row5['PR4'];
-    $p5 = $row5['PR5'];
-    $p6 = $row5['PR6'];
-    $p7 = $row5['PR7'];
-    $p8 = $row5['PR8'];
-    $p9 = $row5['PR9'];
-    $p10 = $row5['PR10'];
-    $p11 = $row5['PR11'];
-    $p12 = $row5['PR12'];
-    $p13 = $row5['PR13'];
-    $p14 = $row5['PR14'];
-    $p15 = $row5['PR15'];
-    $p16 = $row5['PR16'];
-    $p17 = $row5['PR17'];
-    $p18 = $row5['PR18'];
-    $p19 = $row5['PR19'];
-    $p20 = $row5['PR20'];
-    $p21 = $row5['PR21'];
-    $p22 = $row5['PR22'];
-    $p23 = $row5['PR23'];
-    $p24 = $row5['PR24'];
-    $prom = $row5['Prom'];
-    //área de gráficos
-    //datos
-    $data1y = array($p1, $p2, $p3, $p4, $p5, $p6);
-    $data2y = array($p7, $p8, $p9, $p10, $p11, $p12, $p13, $p14, $p15, $p16, $p17);
-    $data3y = array($p18, $p19, $p20, $p21, $p22, $p23, $p24);
-    $data4y = array($prom);
-    //grafic0 1
-    $graph = new Graph(300, 200, 'auto');
-    $graph->SetScale("textlin");
-    $theme_class = new UniversalTheme;
-    $graph->SetTheme($theme_class);
-    $graph->yaxis->SetTickPositions(array(1, 2, 3, 4, 5), array(1, 2, 3, 4, 5));
-    $graph->SetBox(false);
-    $graph->ygrid->SetFill(false);
-    $graph->xaxis->SetTickLabels(array('P1', 'P2', 'P3', 'P4', 'P5', 'P6'));
-    $graph->yaxis->HideLine(false);
-    $graph->yaxis->HideTicks(false, false);
-    // Create the bar plots
-    $b1plot = new BarPlot($data1y);
-    $gbplot = new GroupBarPlot(array($b1plot));
-    // ...and add it to the graPH
-    $graph->Add($gbplot);
-    $b1plot->SetColor("white");
-    $b1plot->SetFillColor("#00FFFF");
-    $graph->title->Set("Sobre la Clase");
-    // Display the graph
-    $graph->Stroke(_IMG_HANDLER);
-    $fileName1 = "temp/graf1.png";
-    $fileName1 = "..";
-    $graph->img->Stream($fileName1);
-    // //grafic0 2
-    // $graph = new Graph(300, 200, 'auto');
-    // $graph->SetScale("textlin");
-    // $theme_class = new UniversalTheme;
-    // $graph->SetTheme($theme_class);
-    // $graph->yaxis->SetTickPositions(array(1, 2, 3, 4, 5), array(1, 2, 3, 4, 5));
-    // $graph->SetBox(false);
-    // $graph->ygrid->SetFill(false);
-    // $graph->xaxis->SetTickLabels(array('P7', 'P8', 'P9', 'P10', 'P11', 'P12', 'P13', 'P14', 'P15', 'P16', 'P17'));
-    // $graph->yaxis->HideLine(false);
-    // $graph->yaxis->HideTicks(false, false);
-    // // Create the bar plots
-    // $b2plot = new BarPlot($data2y);
-    // $gbplot2 = new GroupBarPlot(array($b2plot));
-    // // ...and add it to the graPH
-    // $graph->Add($gbplot2);
-    // $b1plot->SetColor("white");
-    // $b1plot->SetFillColor("#00FFFF");
-    // $graph->title->Set("Actitud del Docente");
-    // // Display the graph
-    // $graph->Stroke(_IMG_HANDLER);
-    // $fileName2 = "temp/graf2.png";
-    // $graph->img->Stream($fileName2);
-    // //grafic0 3
-    // $graph = new Graph(300, 200, 'auto');
-    // $graph->SetScale("textlin");
-    // $theme_class = new UniversalTheme;
-    // $graph->SetTheme($theme_class);
-    // $graph->yaxis->SetTickPositions(array(1, 2, 3, 4, 5), array(1, 2, 3, 4, 5));
-    // $graph->SetBox(false);
-    // $graph->ygrid->SetFill(false);
-    // $graph->xaxis->SetTickLabels(array('P18', 'P19', 'P20', 'P21', 'P22', 'P23', 'P24'));
-    // $graph->yaxis->HideLine(false);
-    // $graph->yaxis->HideTicks(false, false);
-    // // Create the bar plots
-    // $b3plot = new BarPlot($data3y);
-    // $gbplot = new GroupBarPlot(array($b3plot));
-    // // ...and add it to the graPH
-    // $graph->Add($gbplot);
-    // $b1plot->SetColor("white");
-    // $b1plot->SetFillColor("#00FFFF");
-    // $graph->title->Set("Actividades y Evaluación");
-    // // Display the graph
-    // $graph->Stroke(_IMG_HANDLER);
-    // $fileName3 = "temp/graf3.png";
-    // $graph->img->Stream($fileName3);
-    // //grafic0 2
-    // $graph = new Graph(300, 200, 'auto');
-    // $graph->SetScale("textlin");
-    // $theme_class = new UniversalTheme;
-    // $graph->SetTheme($theme_class);
-    // $graph->yaxis->SetTickPositions(array(1, 2, 3, 4, 5), array(1, 2, 3, 4, 5));
-    // $graph->SetBox(false);
-    // $graph->ygrid->SetFill(false);
-    // $graph->xaxis->SetTickLabels(array('Promedio'));
-    // $graph->yaxis->HideLine(false);
-    // $graph->yaxis->HideTicks(false, false);
-    // // Create the bar plots
-    // $b4plot = new BarPlot($data4y);
-    // $gbplot2 = new GroupBarPlot(array($b4plot));
-    // // ...and add it to the graPH
-    // $graph->Add($gbplot2);
-    // $b1plot->SetColor("white");
-    // $b1plot->SetFillColor("#00FFFF");
-    // $graph->title->Set("Promedo General");
-    // // Display the graph
-    // $graph->Stroke(_IMG_HANDLER);
-    // $fileName4 = "temp/graf4.png";
-    // $graph->img->Stream($fileName4);
-    ?>
-    <!-- Reporte End -->
 
     <body class="text-center">
         <div class="container">
-            <main role="main" class="inner cover">
+            <div class="hojapdf" id="reportepdf">
+                <table width="100%" border="0">
+                    <tr>
+                        <td width="20%" align="center" valign="middle"><img src="../includes/logo-edomex.png" alt="Estado de México" width="90%"></td>
+                        <td width="60%" align="center" valign="middle">
+                            <h1>Universidad Mexiquense del Bicentenario</h1>
+                            <h2>Unidad de Estudios Superiores Xalatlaco</h2>
+                            <h3>Coordinación de carrera</h3>
 
-            </main>
+                        </td>
+                        <td width="20%" align="center" valign="middle"><img src="../includes/logoumb.png" alt="Universidad Mexiquense del Bicentenario" width="90%"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="right" valign="middle"> Calle Los Capulines S/N, Barrio de San Juan,
+                            Xalatlaco México a <?php new DateTime() ?>.</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="center" valign="middle">
+                            <p class="text-justify">A continuación, se presentan la información recopilada en el periodo de <?php echo $fecha_inicio ?> al <?php echo $fecha_fin ?> del desempeño laboral realizado al
+                                docente <?php echo $nombre_docente ?>
+                                por parte de los alumnos al cual imparte la asignatura <?php echo $nombre_materia ?>.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td colspan="3" align="center" valign="middle">
+                            <table width="100%" border="1">
+                                <tr>
+                                    <td width="22%">Carrera:</td>
+                                    <td width="27%"><?php echo $nombre_carrera ?></td>
+                                    <td width="29%">Semestre:</td>
+                                    <td width="22%"><?php echo $nombre_semestre ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Clave Docente:</td>
+                                    <td><?php echo $clave_docente ?></td>
+                                    <td>Grupo:</td>
+                                    <td><?php echo $nombre_carrera ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Nombre Docente:</td>
+                                    <td><?php echo $nombre_docente ?></td>
+                                    <td>Fecha Reporte:</td>
+                                    <td><?php echo $time ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Periodo:</td>
+                                    <td><?php echo "2021-2022" ?></td>
+                                    <td>Tamaño Muestra:</td>
+                                    <td><?php echo $data['total'] ?></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="center" valign="middle">
+                            <table width="100%" border="0">
+                                <tr>
+                                    <td colspan="2" width="50%"><img src="../includes/graf1.jpg" alt="Grafica 1" width="90%"></td>
+                                    <td colspan="2" width="50%"><img src="../includes/graf2.jpg" alt="Grafica 3" width="90%"></td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><img src="../includes/graf3.jpg" alt="Grafica 3" width="90%"></td>
+                                    <td colspan="2"><img src="../includes/graf4.jpg" alt="Grafica 4" width="90%"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div align="center">
+                                            <p> <strong>Elaboró:</strong><br>
+                                                I.S.C. Anibal Arellano Aparicio Legarreta Montes<br>
+                                                Coodi </p>
+                                        </div>
+                                    </td>
+                                    <td colspan="2"><?php echo $nombre_carrera ?></td>
+
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <br>
+            <script>
+                function printDiv(nombreDiv) {
+                    var contenido = document.getElementById(nombreDiv).innerHTML;
+                    var contenidoOriginal = document.body.innerHTML;
+                    document.body.innerHTML = contenido;
+                    window.print();
+                    document.body.innerHTML = contenidoOriginal;
+                }
+            </script>
+            <div class="text-center">
+                <a href="#" onclick="printDiv('reportepdf')" class="btn btn-primary"><i class="fas fa-print"></i> Imprimir
+                    Reporte</a>
+            </div>
         </div>
     </body>
+
+    </html>
 <?php
-    include("futter.php");
+
 } else {
+    include("futteralum.php");
     header("location: ../index.php");
 }
+include("futteralum.php");
+
+
+
 ?>

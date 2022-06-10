@@ -12,6 +12,9 @@ if (isset($_SESSION['Id_admin'])) {
     $resultMaestros = mysqli_query($conexion, $sqlMaestros);
     $sqlMaterias = "SELECT * FROM materias WHERE Carrera = '$id_admin_carrera'";
     $resultMaterias = mysqli_query($conexion, $sqlMaterias);
+    //TODO BUSQUEDA DE SEMESTRES
+    $sqlSemestre = "SELECT * FROM `semestre` WHERE mod(id,2) = 0";
+    $resultSemestre = mysqli_query($conexion, $sqlSemestre);
 ?>
     <div class="alert alert-success" role="alert">
         <div class="container">
@@ -27,7 +30,7 @@ if (isset($_SESSION['Id_admin'])) {
         <!-- Button trigger modal -->
         <div class="col-lg-5">
             <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                + Agregar nueva encuesta
+                + Crear nuevas encuestas
             </button>
         </div>
         <!-- Modal -->
@@ -35,44 +38,46 @@ if (isset($_SESSION['Id_admin'])) {
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-
                         <h5 class="modal-title" id="exampleModalLabel">Agregar Encuesta</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="alert alert-warning" role="alert">
+                            <div class="container">
+                                <h5 class="alert-heading text-center">AVISO IMPORTANTE</h5>
+                                <hr>
+                                <p style="text-align: justify;">Una vez dada de alta las encuestas por semestre, todas las materias correspondientes a este serán dadas de alta</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="modal-body">
                         <form method="POST" action="encuestas/saveEncuesta.php">
                             <!--   PRUEBA CON SELECT  -->
                             <div class="form-group">
-                                <label class="font-weight-bold">Docente</label>
-                                <select class="form-control" name="Docente" autofocus required>
+                                <label class="font-weight-bold">Semestre</label>
+                                <select class="form-control" name="Semestre" autofocus required>
                                     <option value="0">Seleccione:</option>
                                     <?php
-                                    while ($filasCa = mysqli_fetch_array($resultMaestros)) {
-                                        echo '<option value="' . $filasCa["ID"] . '">' . $filasCa["Nombre_Docente"] . " " . $filasCa["Ap_Paterno"] . " " . $filasCa["Ap_Materno"] . '</option>';
+                                    while ($filasMa = mysqli_fetch_array($resultSemestre)) {
+                                        $id_semestre = $filasMa['id'];
+                                        $nombre_semestre = $filasMa['nombre_semestre'];
+                                        echo $id_semestre;
+                                        echo $nombre_semestre;                                  
+                                        echo '<option value="' . $id_semestre . '">' . $nombre_semestre . '</option>';
                                     }
                                     ?>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="font-weight-bold">Materia</label>
-                                <select class="form-control" name="Materia" autofocus required>
-                                    <option value="0">Seleccione:</option>
-                                    <?php
-                                    while ($filasMa = mysqli_fetch_array($resultMaterias)) {
-                                        echo '<option value="' . $filasMa["ID"] . '">' . $filasMa["Nombre"] . '</option>';
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="font-weight-bold">Fecha de conclusión</label>
+                                <label class="font-weight-bold">Fecha limite</label>
                                 <span class="input-group-append">
                                     <span class="input-group-text bg-white">
-                                    <i class="fa fa-calendar"></i>   
+                                        <i class="fa fa-calendar"></i>
                                     </span>
                                 </span>
-                                <input type="date" name="FechaFin" class="form-control" required>                                
+                                <input type="date" name="FechaFin" class="form-control" required>
                             </div>
                             <div class="container">
                                 <input type="submit" class="btn btn-success btn-block" name="save" value="GUARDAR">
@@ -99,7 +104,8 @@ if (isset($_SESSION['Id_admin'])) {
                 <table class="table">
                     <thead>
                         <tr>
-                            <th width="70%">Título</th>
+                            <th width="70%">Materia</th>
+                            <th width="13%">Semestre</th>
                             <th width="13%">Editar</th>
                             <th width="13%">Reporte</th>
                             <th width="10%">Eliminar</th>
@@ -112,7 +118,8 @@ if (isset($_SESSION['Id_admin'])) {
                             $status = $mostrar['Status'];
                         ?>
                             <tr>
-                                <td><?php echo utf8_encode($mostrar['Nombre']); ?></td>
+                                <td><?php echo $mostrar['Nombre'] ?></td>
+                                <td><?php echo $mostrar['Semestre'] ?></td>
                                 <td>
                                     <a href="editEncuesta.php?Id_encuesta= <?php echo $mostrar["Id_encuesta"]; ?>" class="btn btn-info ">
                                         <i class="fas fa-edit"></i>
@@ -153,7 +160,7 @@ if (isset($_SESSION['Id_admin'])) {
 
 
     </main>
-    
+
 
 <?php
 } else {

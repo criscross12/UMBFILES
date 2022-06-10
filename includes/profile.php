@@ -7,7 +7,7 @@ if (isset($_SESSION['id'])) {
     include("headeralum.php");
 ?>
 <?php
-   $sql = "SELECT carrera.Nombre_Carrera as NombreCarrera, alumno.Nombre as NombreAlumno,alumno.A_paterno as AP,semestre.nombre_semestre as semestre, alumno.A_Materno AS AM,alumno.Contrasena as contrasena FROM alumno INNER join carrera on alumno.Carrera = carrera.id INNER JOIN semestre on semestre.id = alumno.semestre where alumno.id= $idUsuario";
+   $sql = "SELECT correo as Correo_alumno, carrera.Nombre_Carrera as NombreCarrera, alumno.Nombre as NombreAlumno,alumno.A_paterno as AP,semestre.nombre_semestre as semestre, alumno.A_Materno AS AM,alumno.Contrasena as contrasena FROM alumno INNER join carrera on alumno.Carrera = carrera.id INNER JOIN semestre on semestre.id = alumno.semestre where alumno.id= $idUsuario";
     if ($conexion->query($sql)->num_rows > 0) {
         foreach ($conexion->query($sql) as $filas) {
             $NombreAlum = $filas["NombreAlumno"];
@@ -16,6 +16,7 @@ if (isset($_SESSION['id'])) {
             $Contra = $filas["contrasena"];
             $carrera = $filas["NombreCarrera"];
             $semestre = $filas["semestre"];
+            $correo = $filas['Correo_alumno'];
         }
     }                
 
@@ -56,6 +57,8 @@ if (isset($_SESSION['id'])) {
                             <div class="col-sm-6">
                                 <p class="font-weight-bold">Semestre:</p>
                                 <h6 class="text-muted"><?php echo $semestre ?></h6>
+                                <p class="font-weight-bold">Correo Institucional:</p>
+                                <h6 class="text-muted"><?php echo $correo ?></h6>
                             </div>
                         </div>
                     </div>
