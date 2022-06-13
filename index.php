@@ -26,11 +26,12 @@
 
             <label for="contrasena">Contraseña</label>
             <input type="password" name="contrasena" placeholder="Enter your Contraseña" required>
-
+            <br>
+            <br>
             <input type="submit" value="Iniciar Sesión">
-            <div class="col text-center">
+            <!-- <div class="col text-center">
                 <a href="includes/registro.php" class="btn btn-success btn-lg " role="button" aria-disabled="true">Registrar</a>
-            </div>
+            </div> -->
         </div>
     </form>
 

@@ -2,6 +2,10 @@
 session_start();
 if (isset($_SESSION['Id_admin'])) {
     include("header.php");
+    $Id_admin = $_SESSION['Id_admin'];
+    $sql = mysqli_query($conexion, "SELECT * FROM `administradores` where Id_admin = '$Id_admin'");
+    $filas = mysqli_fetch_assoc($sql);
+    $id_admin_carrera = $filas['Carrera'];
 ?>
 
     <div class="container">
@@ -9,23 +13,31 @@ if (isset($_SESSION['Id_admin'])) {
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th width="28%">Nombre</th>
-                    <th width="20%">Matricula</th>
-                    <th width="20%">Correo Instiucional</th>
-                    <th width="10%">Acciones</th>
+                    <th width="5%" class="text-center">Clave Docente</th>
+                    <th width="20%">Nombre</th>
+                    <th width="5%">Materias</th>
+                    <th width="5%" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <h4 class="text-center">Lista Maestros</h4>
                 <?php
                 //$sql = "SELECT * FROM `maestros`";
-                $sql = mysqli_query($conexion, 'SELECT * FROM `maestros` ORDER by Ap_Paterno ASC');
+                $sql = mysqli_query($conexion, "select DISTINCT maestros.ID, maestros.Titulo, maestros.Nombre_Docente, maestros.Ap_Paterno, maestros.Ap_Materno from maestros INNER join MateriaDocente where maestros.ID=MateriaDocente.IdDocente and MateriaDocente.IdCarrera='$id_admin_carrera' and maestros.Activo=1 order by maestros.Ap_Paterno asc");
                 while ($filas = mysqli_fetch_assoc($sql)) {
+                    $ID = $filas['ID'];
+                    $sqlAS = "select DISTINCT materias.Nombre from maestros INNER join MateriaDocente INNER join materias on MateriaDocente.IdMateria = materias.Clave where maestros.ID=MateriaDocente.IdDocente and MateriaDocente.IdCarrera= 1 and maestros.Activo=1 and maestros.ID = '$ID' order by maestros.Ap_Paterno asc";
+                    $sql_query  = mysqli_query($conexion,$sqlAS);
+                    $consultak = mysqli_fetch_row($sql_query);                               
                 ?>
                     <tr>
+                        <td class="text-center"> <?php echo $filas['ID']  ?> </td>
                         <td>
                             <a>
-                                <?php echo $filas['titulo'] ?>
+                                <?php echo $filas['Titulo'] ?>
+                            </a>
+                            <a>
+                                <?php echo  $filas['Nombre_Docente'] ?>
                             </a>
                             <a>
                                 <?php echo $filas['Ap_Paterno'] ?>
@@ -33,20 +45,16 @@ if (isset($_SESSION['Id_admin'])) {
                             <a>
                                 <?php echo $filas['Ap_Materno'] ?>
                             </a>
-                            <a>
-                                <?php echo  $filas['Nombre_Docente'] ?>
-                            </a>
                         </td>
-                        <td> <?php echo $filas['ID']  ?> </td>
-                        <td> <?php echo $filas['correo']  ?> </td>
-                        <td>
-                            <a href="editMaestros.php?ID=<?php echo $filas['ID'] ?>" class="btn btn-secondary">
-                                <i class="fas fa-edit"></i>
+                        <td> Materias </td>
+                        <td class="text-center">
+                            <a href="reporte2.php?ID=<?php echo $filas['ID'] ?>" class="btn btn-danger">
+                                <i class="fas fa-file-pdf"></i>
                             </a>
-                            <a href="maestros/deleteM.php?id=<?php echo $filas['ID'] ?>" class="btn btn-danger">
+                            <!-- <a href="maestros/deleteM.php?id=<?php echo $filas['ID'] ?>" class="btn btn-danger">
                                 <i class="fas fa-trash-alt" onclick="return confirm('Esta seguro de eliminar al alumno?');">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></i>
-                            </a>
+                            </a> -->
                         </td>
                     </tr>
                 <?php } ?>

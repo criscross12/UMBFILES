@@ -20,7 +20,7 @@ if (isset($_SESSION['Id_admin'])) {
                     <th>Nombre de la materia</th>
                     <th>Carrera</th>
                     <th>Semestre</th>
-                    <th>Acciones</th>
+                    <!-- <th>Acciones</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -42,7 +42,7 @@ if (isset($_SESSION['Id_admin'])) {
                             </td>
                             <td> <?php echo $Carrera ?> </td>
                             <td> <?php echo $Semestre  ?> </td>
-                            <td>
+                            <!-- <td>
                                 <a href="editMateria.php?id=<?php echo $filas['id']; ?>" class="btn btn-secondary">
                                     <i class="fas fa-edit"></i>
                                 </a>
@@ -50,7 +50,7 @@ if (isset($_SESSION['Id_admin'])) {
                                     <i class="fas fa-trash-alt" onclick="return confirm('Esta seguro de eliminar al alumno?');">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></i>
                                 </a>
-                            </td>
+                            </td> -->
                         </tr>
                 <?php }
                 } ?>

@@ -29,7 +29,7 @@ if (isset($_SESSION['id'])) {
     $p49 = $_POST['Pregunta49'];
     $p50 = $_POST['Pregunta50'];
     $p51 = $_POST['Pregunta51'];
-    $prom14 = ($p43 + $p44 + $p45 + $p46 + $p47 + $p48 + $p49 + $p50 + $p51) / 5;
+    $prom14 = ($p43 + $p44 + $p45 + $p46 + $p47 + $p48 + $p49 + $p50 + $p51) / 9;
     $prom15 = $prom13 + $prom14;
     $sqlinsert1 = "UPDATE encuesta_respuestas set p43=" . $p43 . ", p44=" . $p44 . ",  p45=" . $p45 . ",  p46=" . $p46 . ", p47=" . $p47 . ", p48=" . $p48 . ", p49=" . $p49 . ", p50=" . $p50 . ", p51=" . $p51 . "  where IdEncuestaRes=$idEncuestaRes";
     // $conexion->query($sqlinsert1) || die("Error:" );
@@ -76,7 +76,10 @@ if (isset($_SESSION['id'])) {
                                         <tr>
                                             <td><?php echo $mostrarP['Id'] . "._" . " " . $preguntaTXT ?></td>
                                             <td>
-                                                <input class="form-check-input" type="radio" name="Pregunta<?php echo $mostrarP[0] ?>" id="flexRadioDefault1" value="1" checked>
+                                                <input class="form-check-input" type="radio" name="Pregunta<?php echo $mostrarP[0] ?>" id="flexRadioDefault1" value="0" >
+                                            </td>
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="Pregunta<?php echo $mostrarP[0] ?>" id="flexRadioDefault1" value="1">
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="radio" name="Pregunta<?php echo $mostrarP[0] ?>" id="flexRadioDefault1" value="2">
@@ -85,10 +88,7 @@ if (isset($_SESSION['id'])) {
                                                 <input class="form-check-input" type="radio" name="Pregunta<?php echo $mostrarP[0] ?>" id="flexRadioDefault1" value="3">
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="radio" name="Pregunta<?php echo $mostrarP[0] ?>" id="flexRadioDefault1" value="4">
-                                            </td>
-                                            <td>
-                                                <input class="form-check-input" type="radio" name="Pregunta<?php echo $mostrarP[0] ?>" id="flexRadioDefault1" value="5">
+                                                <input class="form-check-input" type="radio" name="Pregunta<?php echo $mostrarP[0] ?>" id="flexRadioDefault1" value="4" checked>
                                             </td>
                                         <tr> <input TYPE="HIDDEN" NAME="pre<?php echo $mostrarP[0] ?>" value="<?php echo $mostrarP[0] ?>"></tr>
                                         </tr>

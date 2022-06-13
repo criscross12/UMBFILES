@@ -25,8 +25,9 @@ if (isset($_SESSION['id'])) {
     $p62 = $_POST['Pregunta62'];
     $p63 = $_POST['Pregunta63'];
     $prom20 = ($p59 + $p60 + $p61 + $p62 + $p63) / 5;
-    $promFinal = $prom19 + $prom20;
-    $sqlinsert1 = "UPDATE encuesta_respuestas set p59=" . $p59 . ", p60=" . $p60 . ",  p61=" . $p61 . ",  p62=" . $p62 . ", p63=" . $p63 . ", Promedio=" . $promFinal . ", Activo=" . 1 . "  where IdEncuestaRes=$idEncuestaRes";
+    $promFinal = ($prom19 + $prom20);
+    $fin  = $promFinal / 11;
+    $sqlinsert1 = "UPDATE encuesta_respuestas set p59=" . $p59 . ", p60=" . $p60 . ",  p61=" . $p61 . ",  p62=" . $p62 . ", p63=" . $p63 . ", Promedio=" . $fin . ", Activo=" . 1 . "  where IdEncuestaRes=$idEncuestaRes";
     // $conexion->query($sqlinsert1) || die("Error:" );
     $consulta = mysqli_query($conexion, $sqlinsert1);
     if (!$consulta) {
@@ -38,29 +39,22 @@ if (isset($_SESSION['id'])) {
         <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
             <header class="masthead mb-auto">
                 <div class="inner">
-                    <h3 class="masthead-brand">Cover</h3>
+                    <h3 class="masthead-brand"></h3>
                     <nav class="nav nav-masthead justify-content-center">
-                        <a class="nav-link active" href="#">Home</a>
-                        <a class="nav-link" href="#">Features</a>
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link active" href="#"></a>
+                        <a class="nav-link" href="#"></a>
+                        <a class="nav-link" href="#"></a>
                     </nav>
                 </div>
             </header>
 
             <main role="main" class="inner cover">
-                <h1 class="cover-heading">Contestado</h1>
-                <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit
-                    the text, and add your own fullscreen background photo to make it your own.</p>
+                <h1 class="cover-heading">!!!!Contestado!!!!</h1>
+                <p class="lead">Gracias por tu participación, esperamos que tu experiencia fuera la más agradable, te invitamos a seguir contestando tus encuestas pendientes, en caso contrario, puedes finalizar tu sessión.</p>
                 <p class="lead">
-                    <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+                    <a href="publicacines.php" class="btn btn-lg btn-success">Volver a encuetas -></a>
                 </p>
             </main>
-
-            <footer class="mastfoot mt-auto">
-                <div class="inner">
-                    <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-                </div>
-            </footer>
         </div>
     </body>
 

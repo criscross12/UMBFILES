@@ -10,13 +10,13 @@ if (isset($_SESSION['id'])) {
 <body class="text-center">
     <div class="container">
         <main role="main" class="inner cover">
-            <h1 class="cover-heading">Bienvenido <?php echo $filas['Nombre'] ?></h1>
+            <br>
+            <br>
+            <br>
+            <h2 class="cover-heading">Bienvenido <?php echo ucwords($filas['Nombre'])?></h2>
             <p class="lead" style="text-align: justify;">Bienvenido a la prueba para la app web que pretende implementar
                 competencias digitales
-                en la UES Xalatlaco, en esta primera prueba se harán pruebas al módulo de archivos que
-                consiste en que los alumnos suban a al sistema documentos digitalizados que son
-                manipulados en el área de control escolar como lo son el acta de nacimiento, CURP, entre
-                otros que son requeridos en esta área</p>
+                en la UES Xalatlaco, en esta primera prueba se harán pruebas al módulo de evaluación docente por lo que tu cooperación es de suma importancia.</p>
             <p class="lead">
                 <a href="../archivos/Manuales/M2021.pdf" download="Manual de uso Alumno" class="btn btn-lg btn-info">
                     Descargar</a>

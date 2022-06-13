@@ -5,7 +5,7 @@ $sqlEncuestas = "SELECT * FROM encuesta WHERE Status= 1";
 $res = mysqli_query($conexion, $sqlEncuestas);
 $sqlMaterias = "SELECT * FROM `materias` where Carrera = '$idCarrera' and Semestre ='$idSemestre' ";
 $resMaterias = mysqli_query($conexion, $sqlMaterias);
-$sqlNameM = "SELECT * FROM `encuesta` INNER JOIN materias on materias.ID= encuesta.Materia INNER JOIN maestros on maestros.ID = encuesta.Docente where materias.Carrera = '$idCarrera' and materias.Semestre = '$idSemestre'";
+$sqlNameM = "SELECT * FROM `encuesta` INNER JOIN materias on materias.ID= encuesta.Materia INNER JOIN maestros on maestros.ID = encuesta.Docente where materias.Carrera = '$idCarrera' and materias.Semestre = '$idSemestre' and encuesta.Status  = 1";
 $resMa = mysqli_query($conexion, $sqlNameM);
 
 include("headeralum.php");
@@ -35,7 +35,7 @@ include("headeralum.php");
                                 <th width="13%">Fecha de Publicación</th>
                                 <th width="13%">Fecha Limite</th>
                                 <th width="13%">Contestar</th>
-                                <th width="10%">Status</th>
+                                <th width="10%">Estatus</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,5 +88,7 @@ include("headeralum.php");
     </main>
 
 </body>
-
+<?php
+include("futter.php");
+?>
 </html>

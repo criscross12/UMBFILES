@@ -72,10 +72,10 @@ if (isset($_SESSION['id'])) {
 <?php
 
 } else {
-    include("futter.php");
+    include("futteralum.php");
     header("location: ../index.php");
 }
-include("futter.php");
+include("futteralum.php");
 
 
 

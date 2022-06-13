@@ -6,7 +6,7 @@ if (isset($_SESSION['Id_admin'])) {
     $filas = mysqli_fetch_assoc($sql);
     $id_admin_carrera = $filas['Carrera'];
     include("header.php");
-    $sqlEncuestas = "SELECT * FROM encuesta INNER join materias on encuesta.Materia= materias.ID where Carrera = $id_admin_carrera";
+    $sqlEncuestas = "SELECT * FROM encuesta INNER join materias on encuesta.Materia= materias.ID INNER join semestre on semestre.id = materias.Semestre where Carrera = $id_admin_carrera";
     $res = mysqli_query($conexion, $sqlEncuestas);
     $sqlMaestros = "SELECT * FROM maestros";
     $resultMaestros = mysqli_query($conexion, $sqlMaestros);
@@ -70,7 +70,7 @@ if (isset($_SESSION['Id_admin'])) {
                                     ?>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label class="font-weight-bold">Fecha limite</label>
                                 <span class="input-group-append">
                                     <span class="input-group-text bg-white">
@@ -78,7 +78,7 @@ if (isset($_SESSION['Id_admin'])) {
                                     </span>
                                 </span>
                                 <input type="date" name="FechaFin" class="form-control" required>
-                            </div>
+                            </div> -->
                             <div class="container">
                                 <input type="submit" class="btn btn-success btn-block" name="save" value="GUARDAR">
                                 <button type="button" class="btn btn-info btn-block" data-bs-dismiss="modal">←
@@ -107,7 +107,7 @@ if (isset($_SESSION['Id_admin'])) {
                             <th width="70%">Materia</th>
                             <th width="13%">Semestre</th>
                             <th width="13%">Editar</th>
-                            <th width="13%">Reporte</th>
+                            <!-- <th width="13%">Reporte</th> -->
                             <th width="10%">Eliminar</th>
                             <th width="10%">Status</th>
                         </tr>
@@ -119,15 +119,16 @@ if (isset($_SESSION['Id_admin'])) {
                         ?>
                             <tr>
                                 <td><?php echo $mostrar['Nombre'] ?></td>
-                                <td><?php echo $mostrar['Semestre'] ?></td>
+                                <td><?php echo $mostrar['nombre_semestre'] ?></td>
                                 <td>
                                     <a href="editEncuesta.php?Id_encuesta= <?php echo $mostrar["Id_encuesta"]; ?>" class="btn btn-info ">
                                         <i class="fas fa-edit"></i>
                                 </td>
-                                <td>
+                                <!-- Generar encuesta -->
+                                <!-- <td>
                                     <a href="reporte2.php?Id_encuesta= <?php echo $mostrar["Id_encuesta"]; ?>" class="btn btn-info ">
                                         <i class="fas fa-file-signature"></i>
-                                </td>
+                                </td> -->
                                 <!-- ELIMINAR ARCHIVO-->
                                 <td>
                                     <a href="encuestas/deleteEncuesta.php?id=<?php echo $mostrar['Id_encuesta'] ?>" class="btn btn-danger">

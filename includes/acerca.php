@@ -51,14 +51,11 @@ if (isset($_SESSION['id'])) {
           <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
         </div>
         <div>
-          <a href="https://www.facebook.com/people/Cristi%C3%A1n-Morales/100044308724525" class="btn btn-info">
-            <i class="fab fa-facebook"></i>
-          </a>
+
           <a href="https://github.com/criscross12" class="btn btn-info">
             <i class="fab fa-github"></i>
           </a>
         </div>
-        <div id="copyright">Copyright&copy; 2020 - Sistema creado por Cristian Enrique Villa Morales - Todos los derechos reservados</div>
       </footer>
     </div>
   <?php
