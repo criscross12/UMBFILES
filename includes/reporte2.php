@@ -417,7 +417,7 @@ if (isset($_SESSION['Id_admin'])) {
                         <td width="60%" align="center" valign="middle">
                             <h1>Universidad Mexiquense del Bicentenario</h1>
                             <h2>Unidad de Estudios Superiores Xalatlaco</h2>
-                            <h3>Coordinación de carrera</h3>
+                            <h3>Administración UESX</h3>
 
                         </td>
                         <td width="20%" align="center" valign="middle"><img src="../includes/logoumb.png" alt="Universidad Mexiquense del Bicentenario" width="90%"></td>
@@ -428,9 +428,9 @@ if (isset($_SESSION['Id_admin'])) {
                     </tr>
                     <tr>
                         <td colspan="3" align="center" valign="middle">
-                            <p class="text-justify">A continuación, se presentan la información recopilada en el periodo de 13 de Junio del 2022 al 17 de Junio del 2022 del desempeño laboral realizado al
+                            <p class="text-justify">A continuación, se presentan la información recopilada en el periodo del 13 de Junio de 2022 al 17 de Junio de 2022 del desempeño laboral realizado por el 
                                 docente <?php echo $NombreDocente ?> (<?= $ClaveDocente ?>)
-                                por parte de los alumnos al cual imparte la asignatura <?php echo $NombreMateria ?>.
+                            durante el presente semestre.
                             </p>
                         </td>
                     </tr>
@@ -447,8 +447,8 @@ if (isset($_SESSION['Id_admin'])) {
                                 <tr>
                                     <td>Fecha de reporte:</td>
                                     <td><?= $time ?></td>
-                                    <td>Carrera: </td>
-                                    <td><?= $Carerra ?></td>
+                                    <td>Periodo de evaluación: </td>
+                                    <td>Semestral</td>
                                 </tr>
                             </table>
                         </td>
@@ -489,9 +489,9 @@ if (isset($_SESSION['Id_admin'])) {
                             <br>
                                 <hr style="width:50%;text-align:left;margin-left:25%;color:black;background-color:black">
                                 <p> <strong>Elaboró:</strong><br>
-                                Ing.
+                                Lic.
                                     <?=$nombre_Coordinador_carrera?><br>
-                                    Coordinador(a) de <?=$carrera_Admin?></p>
+                                    Administración UESX</p>
                             </div>
                         </td>
                         <td align="center" valign="middle">

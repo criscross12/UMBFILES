@@ -48,17 +48,17 @@ if (isset($_SESSION['id'])) {
                     <div class="form-group">
                         <label class="font-weight-bold">Nombre</label>
                         <input name="nombre" type="text" class="form-control" value="<?php echo $filas['Nombre']; ?>"
-                            placeholder="Update Nombre">
+                            placeholder="Update Nombre" disabled>
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold">Apellido Paterno</label>
                         <input name="AP" type="text" class="form-control" value="<?php echo $filas['A_paterno']; ?>"
-                            placeholder="Update Nombre">
+                            placeholder="Update Nombre" disabled>
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold">Apellido Materno</label>
                         <input name="AM" type="text" class="form-control" value="<?php echo $filas['A_Materno']; ?>"
-                            placeholder="Update Nombre">
+                            placeholder="Update Nombre" disabled>
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold">Matricula</label>

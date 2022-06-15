@@ -9,8 +9,8 @@ $coordinador_carrera = $filas["Carrera"];
 if (isset($_POST['save'])) {
     date_default_timezone_set('America/Mexico_city');
     $Semestre =  $_POST['Semestre'];
-    //Validar que no se agreden doble vez la misma encuesta
-    $sqlEncuestaExist = "SELECT * FROM `encuesta` INNER join materias on encuesta.Materia  = materias.ID WHERE materias.Semestre = '$Semestre' and materias.Carrera = '$coordinador_carrera'";
+    //Validar que no se agregen doble vez la misma encuesta
+    $sqlEncuestaExist = "SELECT * FROM `encuesta` INNER join materias on encuesta.Materia  = materias.ID WHERE materias.Semestre = '$Semestre'";
     $sqlConsultaReivisado = mysqli_query($conexion, $sqlEncuestaExist);
     $C_Revisado = mysqli_fetch_assoc($sqlConsultaReivisado);
     if ($C_Revisado) {
@@ -24,7 +24,7 @@ if (isset($_POST['save'])) {
         $status = 1;
         $fecha = date('Y-m-d');
         //TODO BUSCAR LA RELACION MAESTRO-DOCENTE POR SEMESTRE Y CARRERA
-        $sqlMateriasDocente = "SELECT * FROM `MateriaDocente` INNER JOIN materias on MateriaDocente.IdMateria = materias.Clave where materias.Semestre = '$Semestre' and MateriaDocente.IdCarrera = '$coordinador_carrera' and materias.Carrera = '$coordinador_carrera' ";
+        $sqlMateriasDocente = "SELECT * FROM `MateriaDocente` INNER JOIN materias on MateriaDocente.IdMateria = materias.Clave where materias.Semestre = '$Semestre'";
         $consultaMD = mysqli_query($conexion, $sqlMateriasDocente);
         while ($arrayResult = mysqli_fetch_array($consultaMD)) {
             $Docente = $arrayResult['IdDocente'];

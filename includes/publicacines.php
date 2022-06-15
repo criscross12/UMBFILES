@@ -46,6 +46,7 @@ include("headeralum.php");
                                 $idDocente = $mostrar['Docente'];
                                 $idMateria = $mostrar['Materia'];
                                 $idSemestre = $mostrar['Semestre'];
+                                $idEncuesta = $mostrar['Id_encuesta'];
                             ?>
                                 <tr>
                                     <td><?php echo $mostrar['Nombre']; ?></td>
@@ -66,14 +67,21 @@ include("headeralum.php");
                                         <i class="fas fa-pencil-alt"></i> -->
                                     </td>
                                     <?php
-                                    if ($status == "1") {
+                                    $sqlStatus = mysqli_query($conexion, "SELECT * FROM `encuesta_respuestas` where IdUsuario = '$idUsuario' and Activo = 1 and Id_encuesta = '$idEncuesta'");
+                                    $status = mysqli_fetch_assoc($sqlStatus);                                    
+                                    if (isset($status['Activo'])) {
                                         echo  '<td>
                                     <a  class="btn btn-success">
                                         <i class="fas fa-check-square"></i>
                                     </td>'
                                     ?>
                                 </tr>
-                            <?php } ?>
+                            <?php } else {
+                                        echo  '<td>
+                                 <a  class="btn btn-danger">
+                                     <i class="fas fa-check-square"></i>
+                                 </td>';
+                                    } ?>
                         <?php } ?>
                         </tbody>
                     </table>
@@ -91,4 +99,5 @@ include("headeralum.php");
 <?php
 include("futter.php");
 ?>
+
 </html>

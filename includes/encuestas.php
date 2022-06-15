@@ -6,7 +6,7 @@ if (isset($_SESSION['Id_admin'])) {
     $filas = mysqli_fetch_assoc($sql);
     $id_admin_carrera = $filas['Carrera'];
     include("header.php");
-    $sqlEncuestas = "SELECT * FROM encuesta INNER join materias on encuesta.Materia= materias.ID INNER join semestre on semestre.id = materias.Semestre where Carrera = $id_admin_carrera";
+    $sqlEncuestas = "SELECT * FROM encuesta INNER join materias on encuesta.Materia= materias.ID INNER join semestre on semestre.id = materias.Semestre INNER JOIN carrera on carrera.id = materias.Carrera";
     $res = mysqli_query($conexion, $sqlEncuestas);
     $sqlMaestros = "SELECT * FROM maestros";
     $resultMaestros = mysqli_query($conexion, $sqlMaestros);
@@ -47,7 +47,7 @@ if (isset($_SESSION['Id_admin'])) {
                             <div class="container">
                                 <h5 class="alert-heading text-center">AVISO IMPORTANTE</h5>
                                 <hr>
-                                <p style="text-align: justify;">Una vez dada de alta las encuestas por semestre, todas las materias correspondientes a este serán dadas de alta</p>
+                                <p style="text-align: justify;">Al seleccionar un semestre, dara de alta todas las materias que pertenescan a este por todas las carreras con las que cuenta la UESX</p>
                             </div>
                         </div>
                     </div>
@@ -106,6 +106,7 @@ if (isset($_SESSION['Id_admin'])) {
                         <tr>
                             <th width="70%">Materia</th>
                             <th width="13%">Semestre</th>
+                            <th width="13%">Carrera</th>
                             <th width="13%">Editar</th>
                             <!-- <th width="13%">Reporte</th> -->
                             <th width="10%">Eliminar</th>
@@ -120,6 +121,7 @@ if (isset($_SESSION['Id_admin'])) {
                             <tr>
                                 <td><?php echo $mostrar['Nombre'] ?></td>
                                 <td><?php echo $mostrar['nombre_semestre'] ?></td>
+                                <td><?php echo $mostrar['Nombre_Carrera'] ?></td>
                                 <td>
                                     <a href="editEncuesta.php?Id_encuesta= <?php echo $mostrar["Id_encuesta"]; ?>" class="btn btn-info ">
                                         <i class="fas fa-edit"></i>

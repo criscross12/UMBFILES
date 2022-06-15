@@ -43,7 +43,7 @@ if (isset($_SESSION['id'])) {
                         <div class="row">
                             <div class="col-sm-6">
                                 <p class="font-weight-bold">Nombre:</p>
-                                <h6 class="text-muted"><?php echo strtoupper($AP),"", strtoupper($AM) ?></h6>
+                                <h6 class="text-muted"><?php echo strtoupper($AP)," ", strtoupper($AM) , " "?></h6>
                                 <h6 class="text-muted"><?php echo strtoupper($NombreAlum)  ?></h6>
                                 <p class="font-weight-bold">Contraseña:</p>
                                 <h6 class="text-muted"><?php echo $Contra ?></h6>
