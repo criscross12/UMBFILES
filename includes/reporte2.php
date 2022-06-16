@@ -11,15 +11,8 @@ foreach ($files as $file) {
 }
 //fin
 if (isset($_SESSION['Id_admin'])) {
-    $Id_admin = $_SESSION['Id_admin'];
-    $sql = mysqli_query($conexion, "SELECT * FROM `administradores` INNER JOIN carrera on administradores.Carrera = carrera.id where administradores.Id_admin = '$Id_admin'");
-    $filas = mysqli_fetch_assoc($sql);
-    $id_admin_carrera = $filas['Carrera'];
-    $nombre_Coordinador_carrera = $filas['Nombre'] . " " . $filas['A_paterno'] . " " . $filas['A_materno'];
-    $carrera_Admin = $filas['Nombre_Carrera'];
-
     //TODO Crear Graficas de encuesta    
-    $query5 = "SELECT AVG(P1) as PR1,AVG(P2) as PR2,AVG(P3) as PR3,AVG(P4) as PR4,AVG(P5) as PR5,AVG(P6) as PR6,AVG(P7) as PR7,AVG(P8) as PR8,AVG(P9) as PR9,AVG(P10) as PR10,AVG(P11) as PR11,AVG(P12) as PR12,AVG(P13) as PR13,AVG(P14) as PR14,AVG(P15) as PR15,AVG(P16) as PR16,AVG(P17) as PR17,AVG(P18) as PR18,AVG(P19) as PR19,AVG(P20) as PR20,AVG(P21) as PR21,AVG(P22) as PR22,AVG(P23) as PR23,AVG(P24) as PR24,AVG(P24) as PR24,AVG(P25) as PR25,AVG(P26) as PR26,AVG(P27) as PR27,AVG(P28) as PR28,AVG(P29) as PR29,AVG(P30) as PR30,AVG(P31) as PR31,AVG(P32) as PR32,AVG(P33) as PR33,AVG(P34) as PR34,AVG(P35) as PR35,AVG(P36) as PR36,AVG(P37) as PR37,AVG(P38) as PR38,AVG(P39) as PR39,AVG(P40) as PR40,AVG(P41) as PR41,AVG(P42) as PR42,AVG(P43) as PR43,AVG(P44) as PR44,AVG(P45) as PR45,AVG(P46) as PR46,AVG(P47) as PR47,AVG(P48) as PR48,AVG(P49) as PR49,AVG(P50) as PR50,AVG(P51) as PR51,AVG(P52) as PR52,AVG(P53) as PR53,AVG(P54) as PR54,AVG(P54) as PR54,AVG(P55) as PR55,AVG(P56) as PR56,AVG(P57) as PR57,AVG(P58) as PR58,AVG(P59) as PR59,AVG(P60) as PR60,AVG(P61) as PR61,AVG(P62) as PR62,AVG(P63) as PR63,AVG(Promedio) as Prom FROM encuesta_respuestas where IdCarrera='$id_admin_carrera' and IdDocente= '" . $_GET['ID'] . "'";
+    $query5 = "SELECT AVG(P1) as PR1,AVG(P2) as PR2,AVG(P3) as PR3,AVG(P4) as PR4,AVG(P5) as PR5,AVG(P6) as PR6,AVG(P7) as PR7,AVG(P8) as PR8,AVG(P9) as PR9,AVG(P10) as PR10,AVG(P11) as PR11,AVG(P12) as PR12,AVG(P13) as PR13,AVG(P14) as PR14,AVG(P15) as PR15,AVG(P16) as PR16,AVG(P17) as PR17,AVG(P18) as PR18,AVG(P19) as PR19,AVG(P20) as PR20,AVG(P21) as PR21,AVG(P22) as PR22,AVG(P23) as PR23,AVG(P24) as PR24,AVG(P24) as PR24,AVG(P25) as PR25,AVG(P26) as PR26,AVG(P27) as PR27,AVG(P28) as PR28,AVG(P29) as PR29,AVG(P30) as PR30,AVG(P31) as PR31,AVG(P32) as PR32,AVG(P33) as PR33,AVG(P34) as PR34,AVG(P35) as PR35,AVG(P36) as PR36,AVG(P37) as PR37,AVG(P38) as PR38,AVG(P39) as PR39,AVG(P40) as PR40,AVG(P41) as PR41,AVG(P42) as PR42,AVG(P43) as PR43,AVG(P44) as PR44,AVG(P45) as PR45,AVG(P46) as PR46,AVG(P47) as PR47,AVG(P48) as PR48,AVG(P49) as PR49,AVG(P50) as PR50,AVG(P51) as PR51,AVG(P52) as PR52,AVG(P53) as PR53,AVG(P54) as PR54,AVG(P54) as PR54,AVG(P55) as PR55,AVG(P56) as PR56,AVG(P57) as PR57,AVG(P58) as PR58,AVG(P59) as PR59,AVG(P60) as PR60,AVG(P61) as PR61,AVG(P62) as PR62,AVG(P63) as PR63,AVG(Promedio) as Prom FROM encuesta_respuestas where IdDocente= '" . $_GET['ID'] . "'";
     $res5 = $conexion->query($query5);
     $row5 = $res5->fetch_assoc();
     //valores para la gráfica
@@ -389,12 +382,12 @@ if (isset($_SESSION['Id_admin'])) {
     $fileNameprom = "img/graficas/grafprom.png";
     $graph->img->Stream($fileNameprom);
     //fin graficas
-    $sqlCount  = "SELECT COUNT(IdDocente) as Total FROM `encuesta_respuestas` where IdDocente = '" . $_GET['ID'] . "' and IdCarrera = '$id_admin_carrera' ";
+    $ID_DOCENTE = $_GET['ID'];
+    $sqlCount  = "SELECT COUNT(IdDocente) as Total FROM `encuesta_respuestas` where IdDocente = '$ID_DOCENTE' ";
     $sqlconsultaCount  = mysqli_query($conexion, $sqlCount);
     $filasCount = mysqli_fetch_assoc($sqlconsultaCount);
     $N_Muestra = $filasCount['Total'];
     //Select Docente
-    $ID_DOCENTE = $_GET['ID'];
     $sqlDocente  = "SELECT * FROM `MateriaDocente` INNER JOIN maestros on MateriaDocente.IdDocente = maestros.ID INNER JOIN materias on MateriaDocente.IdMateria = materias.Clave INNER join carrera on carrera.id = materias.Carrera  where maestros.ID = '" . $ID_DOCENTE . "' ";
     $sqlconsultaDocente  = mysqli_query($conexion, $sqlDocente);
     $filasDocente = mysqli_fetch_assoc($sqlconsultaDocente);
@@ -490,7 +483,7 @@ if (isset($_SESSION['Id_admin'])) {
                                 <hr style="width:50%;text-align:left;margin-left:25%;color:black;background-color:black">
                                 <p> <strong>Elaboró:</strong><br>
                                 Lic.
-                                    <?=$nombre_Coordinador_carrera?><br>
+                                   f<br>
                                     Administración UESX</p>
                             </div>
                         </td>
